@@ -104,15 +104,15 @@ Let's install and configure the software factory!  We are using [Kustomize](http
 **IMPORTANT**
 Our root directory, unless otherwise stated in the directions, will be the `1-demo` directory.  Many of these directions assume you are in the `1-demo` directory.  If not stated otherwise, make sure to run commands from the `1-demo` directory.
 
-**1. Begin the software factory installation with the following command.**
+**1. Run the software factory installation script.**
+
+This command starts the installation.
 
 ```shell
 ./install.sh
-```
+``` 
 
-The first command starts the installation. The script may take 10 minutes or so to run.    
-
-**2. Now, We Wait**
+**Now, We Wait**
 
 This begins the 5 - 10 minute installation process.  If the network connection is slower than normal, this could take upwards of 15 minutes. It is normal for it to retry creating resources multiple times, because multiple interdependent resources are being created asynchronously.
 
@@ -145,7 +145,7 @@ Now that everything is installed and you can access the tools, continue to the n
 
 **3. Validate that Rekor install is complete.**
 
-Installing Rekor should take about 3 - 5 minutes.
+Installing Rekor could take an additional 3 - 5 minutes after the installation script exits.
 
 You can open the ArgoCD web interface to validate that Rekor is up-and-running. Make sure to use the ArgoCD instance that was created in the `devsecops` namespace. Navigate to your `Routes` in the devsecops namespace and click on the `argocd-server` Location.
 
@@ -180,7 +180,7 @@ helm install -f values.yaml everything-pipeline ploigos-charts/charts/ploigos-wo
 
 **6 . Create the k8s resources for a Pipeline as a Service (EventLister / TriggerTemplate / Route).**
 
-As with the previous step, make sure you are in the `1-demo` directory before excuting these commands.
+As with the previous step, make sure you are in the `1-demo` directory before executing these commands.
 
 ```shell
 oc expose svc el-everything-pipeline
