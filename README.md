@@ -141,11 +141,9 @@ Now that everything is installed and you can access the tools, continue to the n
 
 Installing Rekor could take an additional 3 - 5 minutes after the installation script exits.
 
-You can open the ArgoCD web interface to validate that Rekor is up-and-running. Make sure to use the ArgoCD instance that was created in the `devsecops` namespace. Navigate to your `Routes` in the devsecops namespace and click on the `argocd-server` Location.
+You can open the ArgoCD web interface to validate that Rekor is up-and-running. Make sure to use the ArgoCD instance that was created in the `devsecops` namespace. Use the URL printed by the install script, or navigate to your `Routes` in the devsecops namespace and click on the `argocd-server` Location.
 
-Use the username `ploigos` and the generated password that you previously retrieved from the secret.
-
-You'll see a box representing rekor.  When it shows two check marks, you have completely installed Rekor.
+You'll see a box titled "rekor-application".  When the Status line says "Healthy" and "Synced", you have completely installed Rekor.
 
 Navigate to your `Routes` in the sigstore namespace.  Click on the `rekor-server-route` Location, and you'll get a simple website with the heading `Rekor Server`.  That's it, next steps!
 
