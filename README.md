@@ -104,43 +104,17 @@ Let's install and configure the software factory!  We are using [Kustomize](http
 **IMPORTANT**
 Our root directory, unless otherwise stated in the directions, will be the `1-demo` directory.  Many of these directions assume you are in the `1-demo` directory.  If not stated otherwise, make sure to run commands from the `1-demo` directory.
 
-**1 . Clone the Ploigos Automated Governance Platform repository.**
+**1. Begin the software factory installation with the following command.**
 
 ```shell
-git clone git@github.com:ploigos-automated-governance/2-platform-ops.git
+./install.sh
 ```
 
-**2 . Navigate to the cloned repo root folder: `2-platform-ops`. Begin the software factory installation with the following commands.**
+The first command starts the installation. The script may take 10 minutes or so to run.    
 
-```shell
-oc apply -k argo-cd-apps/base/ploigos-software-factory/
-oc delete limitrange --all -n devsecops
-oc delete limitrange --all -n sigstore
-```
+**2. Now, We Wait**
 
-The first command starts the installation.  The second two commands, `oc delete limitrange ...` are there as a precaution.  Some OpenShift configurations will set compute, storage, and memory limits on newly created namespaces.  For this demo, we are going to remove those limits.
-
-**Get An Error?**
-
-If you received an error about the `PloigosPlatform` not being found, it may look like this:
-
-```shell
-error: unable to recognize "argo-cd-apps/base/ploigos-software-factory/": no matches for kind "PloigosPlatform" in version "redhatgov.io/v1alpha1"
-```
-
-Simply wait 2 - 3 minutes and then re-invoke the following command:
-
-```shell
-oc apply -k argo-cd-apps/base/ploigos-software-factory/
-```  
-
-Why did this happen?
-
-The `oc create` command creates a `PloigosPlatform` custom resource.  This `PloigosPlatform` resource depends upon the sofware factory operator being completely registered.  It may happen that the operator has not registered the customer resource definitions by the time the `PloigosPlatform` resource is created.
-
-**Now, We Wait**
-
-This begins the 5 - 10 minute installation process.  If the network connection is slower than normal, this could take upwards of 15 minutes.
+This begins the 5 - 10 minute installation process.  If the network connection is slower than normal, this could take upwards of 15 minutes. It is normal for it to retry creating resources multiple times, because multiple interdependent resources are being created asynchronously.
 
 To validate the platform has been set up properly, do the following.
 
@@ -161,6 +135,7 @@ When we initially setup the software factory platform, a random password was gen
 
 Save this password somewhere for quick copy and paste.  We recommend creating a text file named *pw* in your `1-demo` directory, then pasting your credentials in there.
 
+**2. Validate tool access.**
 
 Let's validate your tool access now. To access the tool, simply navigate to the `Routes` information by using the left-sided navigation of the OpenShift web console. Click on `Networking`, the select `Routes`. You'll see all your routes for the namespace you are currently in.  To see all the software factory tooling routes, make sure you are in the `devsecops` namespace.
 
@@ -168,20 +143,7 @@ Click on the location for `gitea` and `argocd-server`.  Make sure you can log in
 
 Now that everything is installed and you can access the tools, continue to the next steps!
 
-**3 . Install the SigStore components, Rekor.**
-
-**Quick Check** - Make sure you are in the `2-platform-ops` directory before continuing!
-
-Use the `oc` command to switch too the `devsecops` project.
-```shell
-oc project devsecops
-```
-
-Once you have validated you are in the devsecops project, run the following command to set up the SigStore components:
-
-```shell
-oc apply -f argo-cd-apps/app-of-apps/simple-software-supply-chain-platform.yml
-```
+**3. Validate that Rekor install is complete.**
 
 Installing Rekor should take about 3 - 5 minutes.
 
@@ -189,7 +151,7 @@ You can open the ArgoCD web interface to validate that Rekor is up-and-running. 
 
 Use the username `ploigos` and the generated password that you previously retrieved from the secret.
 
-You'll see three boxes.  When all three are green, you have completely installed Rekor.
+You'll see a box representing rekor.  When it shows two check marks, you have completely installed Rekor.
 
 Navigate to your `Routes` in the sigstore namespace.  Click on the `rekor-server-route` Location, and you'll get a simple website with the heading `Rekor Server`.  That's it, next steps!
 
@@ -221,8 +183,6 @@ helm install -f values.yaml everything-pipeline ploigos-charts/charts/ploigos-wo
 As with the previous step, make sure you are in the `1-demo` directory before excuting these commands.
 
 ```shell
-oc create -f el.yml
-oc create -f tt.yml
 oc expose svc el-everything-pipeline
 ```
 
