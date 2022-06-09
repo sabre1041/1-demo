@@ -155,18 +155,7 @@ You'll see a box representing rekor.  When it shows two check marks, you have co
 
 Navigate to your `Routes` in the sigstore namespace.  Click on the `rekor-server-route` Location, and you'll get a simple website with the heading `Rekor Server`.  That's it, next steps!
 
-**4 . Resize the Nexus PVC**
-
-The default storage size is not enough for continued use with this demo.  Therefore, we need to increase it from its current setting to 100 GiB.
-
-```shell
-oc patch pvc nexus-sonatype-nexus-data -p '{"spec":{"resources":{"requests":{"storage":"100Gi"}}}}' -n devsecops
-oc delete po -l app=sonatype-nexus -n devsecops
-```
-
-The pod will be deleted, then a new one will be created.  With the creation of this new pod, the PVC expansion will be registered.
-
-**5 . Install the everything pipeline using Helm**
+**4. Install the everything pipeline using Helm**
 
 **IMPORTANT**
 
@@ -178,7 +167,7 @@ git clone https://github.com/ploigos/ploigos-charts.git
 helm install -f values.yaml everything-pipeline ploigos-charts/charts/ploigos-workflow/tekton-pipeline-everything/
 ```
 
-**6 . Create the k8s resources for a Pipeline as a Service (EventLister / TriggerTemplate / Route).**
+**5. Create the k8s resources for a Pipeline as a Service (EventLister / TriggerTemplate / Route).**
 
 As with the previous step, make sure you are in the `1-demo` directory before executing these commands.
 
