@@ -19,6 +19,9 @@ SERVICE_USER=ploigos
 SERVICE_PASS=$(oc get secret ploigos-service-account-credentials -n devsecops -o yaml | yq .data.password | base64 -d)
 ARGOCD_URL=$(echo "http://$(oc get route argocd-server -o yaml | yq .status.ingress[].host)/")
 GITEA_URL=$(echo "http://$(oc get route gitea -o yaml | yq .status.ingress[].host)/")
+set +x
+echo
+echo "Installation Successful!"
 echo
 echo "=== Environment Details ==="
 echo
@@ -31,4 +34,5 @@ echo "--- SonarQube ---"
 echo "URL: ${GITEA_URL}"
 echo "Username: ${SERVICE_USER}"
 echo "Password: ${SERVICE_PASS}"
+set -x
 

@@ -123,23 +123,17 @@ ploigos-operator-controller-manager-[random-characters-here]```. If complete, th
   
   ![Picture of logs for completed Ploigos Platforom install](assets/ploigos-softwrare-factory-platform-complete-screen.png)
 
-**Once Installed**
+**Viewing Your Credentials**
 
-Now that you have validated the installation, let's obtain our username and password that we'll use for the rest of this demo for the software factory tooling.
+The script prints out information about the installed environment, including credentials. You will need this information to finish these instructions. You may want to copy it to somewhere safe.
 
-When we initially setup the software factory platform, a random password was generated for each tool, and then associated with the username *ploigos*.  To get the password, use the following command:
+If you lose the credentials, you can safely re-run the install script. It will not change anything important, but it will print out the same information again.
 
-  ```shell
-  oc get secret ploigos-service-account-credentials -n devsecops -o yaml | yq .data.password | base64 -d && echo 
-  ```
-
-Save this password somewhere for quick copy and paste.  We recommend creating a text file named *pw* in your `1-demo` directory, then pasting your credentials in there.
+You can also access the same URLs by clicking on them in the OpenShift web console. select Networking -> Routes in the main navigation menu and then. Make sure the `devsecops` project is selected. Select the URLs in the Location column.
 
 **2. Validate tool access.**
 
-Let's validate your tool access now. To access the tool, simply navigate to the `Routes` information by using the left-sided navigation of the OpenShift web console. Click on `Networking`, the select `Routes`. You'll see all your routes for the namespace you are currently in.  To see all the software factory tooling routes, make sure you are in the `devsecops` namespace.
-
-Click on the location for `gitea` and `argocd-server`.  Make sure you can log into those.
+Let's validate your tool access now. Use the information displayed by the script to log into Gitea and ArgoCD.
 
 Now that everything is installed and you can access the tools, continue to the next steps!
 
