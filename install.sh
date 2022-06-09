@@ -1,6 +1,10 @@
 #!/bin/bash
 set -eux -o pipefail
 
+#########################################################################################################################
+# WARNING!!! This script prints out details of the installed environment, including passwords. Please use it carefully. #
+#########################################################################################################################
+
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 PLATFORM_OPS_DIR=${SCRIPT_DIR}/2-platform-ops
 
@@ -10,7 +14,21 @@ PLATFORM_OPS_DIR=${SCRIPT_DIR}/2-platform-ops
 # Run the platform-ops install script
 ${PLATFORM_OPS_DIR}/install-platform.sh
 
-# Delete LimitRanges for created namespaces if they exist
-oc delete limitrange --all -n devsecops
-oc delete limitrange --all -n sigstore
+# Print environment details
+SERVICE_USER=ploigos
+SERVICE_PASS=$(oc get secret ploigos-service-account-credentials -n devsecops -o yaml | yq .data.password | base64 -d)
+ARGOCD_URL=$(echo "http://$(oc get route argocd-server -o yaml | yq .status.ingress[].host)/")
+GITEA_URL=$(echo "http://$(oc get route gitea -o yaml | yq .status.ingress[].host)/")
+echo
+echo "=== Environment Details ==="
+echo
+echo "--- ArgoCD ---"
+echo "URL: ${ARGOCD_URL}"
+echo "Username: ${SERVICE_USER}"
+echo "Password: ${SERVICE_PASS}"
+echo
+echo "--- SonarQube ---"
+echo "URL: ${GITEA_URL}"
+echo "Username: ${SERVICE_USER}"
+echo "Password: ${SERVICE_PASS}"
 
