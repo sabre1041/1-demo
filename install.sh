@@ -30,7 +30,7 @@ echo "URL: ${ARGOCD_URL}"
 echo "Username: ${SERVICE_USER}"
 echo "Password: ${SERVICE_PASS}"
 echo
-echo "--- SonarQube ---"
+echo "--- Gitea ---"
 echo "URL: ${GITEA_URL}"
 echo "Username: ${SERVICE_USER}"
 echo "Password: ${SERVICE_PASS}"
