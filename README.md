@@ -137,7 +137,7 @@ Let's validate your tool access now. Use the information displayed by the script
 
 Now that everything is installed and you can access the tools, continue to the next steps!
 
-**NOTE:** ArgoCD may take a few minutes to start its configuration component (dex). If you get an authentication error when you try to login, wat for one minute and try again. If you still get an authentication error, try deleting the Pod with "dex" in its name, in the devsecops namespace. This will restart dex.
+**NOTE:** ArgoCD may take a few minutes to start its authentication component (dex). If you get an authentication error when you try to log in, wait for a few minutes and try again. If you still get an authentication error, restart Dex by running `oc delete po -l app.kubernetes.io/name=argocd-dex-server` and try again after another minute.
 
 **3. Validate that Rekor install is complete.**
 
