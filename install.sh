@@ -24,8 +24,8 @@ ${PLATFORM_OPS_DIR}/install-platform.sh
 # Print environment details
 SERVICE_USER=ploigos
 SERVICE_PASS=$(oc get secret ploigos-service-account-credentials -n devsecops -o yaml | yq .data.password | base64 -d)
-ARGOCD_URL=$(echo "http://$(oc get route argocd-server -o yaml | yq .status.ingress[].host)/")
-GITEA_URL=$(echo "http://$(oc get route gitea -o yaml | yq .status.ingress[].host)/")
+ARGOCD_URL=$(echo "http://$(oc get route argocd-server -n devsecops -o yaml | yq .status.ingress[].host)/")
+GITEA_URL=$(echo "http://$(oc get route gitea -n devsecops -o yaml | yq .status.ingress[].host)/")
 set +x
 echo
 echo "Installation Successful!"
