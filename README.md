@@ -137,6 +137,8 @@ Let's validate your tool access now. Use the information displayed by the script
 
 Now that everything is installed and you can access the tools, continue to the next steps!
 
+**NOTE:** ArgoCD may take a few minutes to start its configuration component (dex). If you get an authentication error when you try to login, wat for one minute and try again. If you still get an authentication error, try deleting the Pod with "dex" in its name, in the devsecops namespace. This will restart dex.
+
 **3. Validate that Rekor install is complete.**
 
 Installing Rekor could take an additional 3 - 5 minutes after the installation script exits.
