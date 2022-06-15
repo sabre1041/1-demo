@@ -129,7 +129,7 @@ The script prints out information about the installed environment, including cre
 
 If you lose the credentials, you can safely re-run the install script. It will not change anything important, but it will print out the same information again.
 
-You can also access the same URLs by clicking on them in the OpenShift web console. select Networking -> Routes in the main navigation menu and then. Make sure the `devsecops` project is selected. Select the URLs in the Location column.
+You can also access the same URLs by clicking on them in the OpenShift web console. Select Networking -> Routes in the main navigation menu. Make sure the `devsecops` project is selected. Select the URLs in the Location column.
 
 **2. Validate tool access.**
 
@@ -145,7 +145,7 @@ You can open the ArgoCD web interface to validate that Rekor is up-and-running. 
 
 You'll see a box titled "rekor-application".  When the Status line says "Healthy" and "Synced", you have completely installed Rekor.
 
-Navigate to your `Routes` in the sigstore namespace.  Click on the `rekor-server-route` Location, and you'll get a simple website with the heading `Rekor Server`.  That's it, next steps!
+In the OpenShift web console, select Networking -> Routes in the main navigation menu. Select the `sigstore` project in the "Project:" dropdown at the top left. Then find the Location colum. Select the URL in that column. You should see a simple website with the heading `Rekor Server`.  That's it, next steps!
 
 **4. Install the everything pipeline using Helm**
 

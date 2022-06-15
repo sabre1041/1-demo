@@ -5,8 +5,15 @@ set -eux -o pipefail
 # WARNING!!! This script prints out details of the installed environment, including passwords. Please use it carefully. #
 #########################################################################################################################
 
+# Script configuration
+VERBOSE=false # Set to "true" to have this script output debug information including the commands it is running.
+# ** Also see the configuration under ./2-platform-ops/install-platform.sh, which is downloaded the first tim eyou run this script. It has ts own VERBOSE setting.
+
+# Do not change
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 PLATFORM_OPS_DIR=${SCRIPT_DIR}/2-platform-ops
+
+if [ "${VERBOSE}" == "true" ]; then set +x; fi
 
 # Clone the platform-ops repository if it has not already been cloned
 [ ! -d ${PLATFORM_OPS_DIR} ] && git clone git@github.com:ploigos-automated-governance/2-platform-ops.git ${PLATFORM_OPS_DIR}
